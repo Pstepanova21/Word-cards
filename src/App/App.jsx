@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import '../styles/App.css'; 
-import Header from './Header';
-import Footer from './Footer';
-import WordList from './WordList';
-import TrainingMode from './TrainingMode';
+import '../App/App.css'; 
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import WordList from '../WordList/WordList';
+import TrainingMode from '../TrainingMode/TrainingMode';
 
 const App = () => {
   const [words] = useState([

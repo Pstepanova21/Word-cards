@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/TrainingMode.css'; 
+import '../TrainingMode/TrainingMode.css'; 
 
 const TrainingMode = () => {
   return (

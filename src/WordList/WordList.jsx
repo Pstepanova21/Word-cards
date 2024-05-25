@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles/WordList.css'; 
-import WordCard from './WordCard';
+import '../WordList/WordList.css'; 
+import WordCard from '../WordCard/WordCard';
 
 const WordList = ({ words }) => {
   return (

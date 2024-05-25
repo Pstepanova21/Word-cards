@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/WordCard.css'; 
+import '../WordCard/WordCard.css'; 
 
 const WordCard = ({ word, translation }) => {
   return (
