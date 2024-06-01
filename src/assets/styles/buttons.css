@@ -1,0 +1,27 @@
+@import "./variables.css";
+
+button {
+  background-color: var(--button-color);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: var(--font-size);
+  margin: 4px 2px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-time),
+    transform var(--transition-time);
+}
+
+button:hover {
+  background-color: var(--button-color-2);
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: darken(var(--button-color-2));
+  transform: scale(0.95);
+}

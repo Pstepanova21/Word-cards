@@ -1,0 +1,10 @@
+[
+    {"id":"16308","english":"girl","transcription":"[ɡɜːl]","russian":"девочка","tags":"general","tags_json":"[\"general\"]"},
+    {"id":"16309","english":"road","transcription":"[rōd]","russian":"дорога","tags":"general","tags_json":"[\"general\"]"},
+    {"id":"16317","english":"school","transcription":"[skuːl]","russian":"школа","tags":"general","tags_json":"[\"general\"]"},
+    {"id":"16333","english":"hedgehog","transcription":"[ˈhedʒ(h)ɒɡ]","russian":"ёж","tags":"animal","tags_json":"[\"animal\"]"},
+    {"id":"16334","english":"cat","transcription":"[cat]","russian":"кошка","tags":"animal","tags_json":"[\"animal\"]"},
+    {"id":"16335","english":"dad","transcription":"[dæd]","russian":"папа","tags":"general","tags_json":"[\"general\"]"},
+    {"id":"16338","english":"flower","transcription":"[ˈflaʊər]","russian":"цветок","tags":"nature","tags_json":"[\"nature\"]"}
+  ]
+  

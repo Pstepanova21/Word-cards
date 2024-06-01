@@ -1,5 +1,5 @@
-import React from 'react';
-import '../WordCard/WordCard.css'; 
+import React from "react";
+import "./WordCard.css";
 
 const WordCard = ({ word, translation }) => {
   return (

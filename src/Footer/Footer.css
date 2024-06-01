@@ -1,5 +1,6 @@
+@import "../assets/styles/variables.css";
 .footer {
-  background-color: #282c34;
+  background-color: var(--primary-color);
   padding: 10px;
   color: white;
   position: fixed;
