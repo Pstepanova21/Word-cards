@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App/App.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -7,7 +7,20 @@ import TrainingMode from "../TrainingMode/TrainingMode";
 import wordsData from "../data/words.json"; // Импортируем данные
 
 const App = () => {
-  const [words, setWords] = useState(wordsData);
+  const [words, setWords] = useState([]);
+
+  useEffect(() => {
+    const storedWords = localStorage.getItem("words");
+    if (storedWords) {
+      setWords(JSON.parse(storedWords));
+    } else {
+      setWords(wordsData);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("words", JSON.stringify(words));
+  }, [words]);
 
   const updateWord = (id, updatedWord) => {
     setWords(words.map((word) => (word.id === id ? updatedWord : word)));
