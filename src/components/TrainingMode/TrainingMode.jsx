@@ -13,7 +13,7 @@ const TrainingMode = ({ words }) => {
 
   return (
     <div>
-      <h2>Training Mode</h2>
+      <h2 className="training">Training Mode</h2>
       <div className="training-mode">
         {words.map((word) => (
           <div className="word-card" key={word.id}>

@@ -1,7 +1,8 @@
 :root {
-  --primary-color: #282c34;
-  --button-color: #282c34;
-  --button-color-2: #a0a0a0;
+  --primary-color: #00359f;
+  --button-color: #0037a4;
+  --button-color-2: #004cff;
+  --text: rgb(30, 37, 92);
   --font-family: "Arial", sans-serif;
   --font-size: 16px;
   --border-radius: 5px;

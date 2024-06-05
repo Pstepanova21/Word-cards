@@ -9,7 +9,7 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
     transcription: "",
     russian: "",
   });
-  const [showActions, setShowActions] = useState(true); // Состояние для отображения/скрытия столбца "Actions"
+  const [showEdit, setShowEdit] = useState(false);
 
   const handleEditClick = (index, word) => {
     setIsEditing(index);
@@ -31,8 +31,9 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
     setNewWord({ english: "", transcription: "", russian: "" });
   };
 
-  const toggleActions = () => {
-    setShowActions(!showActions);
+  const toggleEdit = () => {
+    setIsEditing(null);
+    setShowEdit(!showEdit);
   };
 
   if (!words.length) {
@@ -47,7 +48,7 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
             <th>Word</th>
             <th>Transcription</th>
             <th>Translation</th>
-            {showActions && <th>Actions</th>}
+            {showEdit && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -89,7 +90,7 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
                   <td>{word.english}</td>
                   <td>{word.transcription}</td>
                   <td>{word.russian}</td>
-                  {showActions && (
+                  {showEdit && (
                     <td className="actions">
                       <button onClick={() => handleEditClick(index, word)}>
                         Edit
@@ -105,8 +106,8 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
           ))}
         </tbody>
       </table>
-      <button onClick={toggleActions}>
-        {showActions ? "Hide Edit Mode" : "Show Edit Mode"}
+      <button onClick={toggleEdit}>
+        {showEdit ? "Hide Edit Mode" : "Show Edit Mode"}
       </button>
       <div className="add-word-form">
         <h3>Add a new word</h3>

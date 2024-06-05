@@ -11,6 +11,7 @@
 .word-list td {
   border: 1px solid #ddd;
   padding: 8px;
+  color: var(--text);
 }
 
 .word-list th {
@@ -34,6 +35,7 @@
 
 .add-word-form {
   margin: 5%;
+  color: var(--text);
 }
 
 .add-word-form input {
