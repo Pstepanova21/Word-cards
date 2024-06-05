@@ -9,6 +9,7 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
     transcription: "",
     russian: "",
   });
+  const [showActions, setShowActions] = useState(true); // Состояние для отображения/скрытия столбца "Actions"
 
   const handleEditClick = (index, word) => {
     setIsEditing(index);
@@ -30,6 +31,10 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
     setNewWord({ english: "", transcription: "", russian: "" });
   };
 
+  const toggleActions = () => {
+    setShowActions(!showActions);
+  };
+
   if (!words.length) {
     return <p>No words available</p>;
   }
@@ -42,7 +47,7 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
             <th>Word</th>
             <th>Transcription</th>
             <th>Translation</th>
-            <th>Actions</th>
+            {showActions && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -84,20 +89,25 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
                   <td>{word.english}</td>
                   <td>{word.transcription}</td>
                   <td>{word.russian}</td>
-                  <td>
-                    <button onClick={() => handleEditClick(index, word)}>
-                      Edit
-                    </button>
-                    <button onClick={() => onDeleteWord(word.id)}>
-                      Delete
-                    </button>
-                  </td>
+                  {showActions && (
+                    <td className="actions">
+                      <button onClick={() => handleEditClick(index, word)}>
+                        Edit
+                      </button>
+                      <button onClick={() => onDeleteWord(word.id)}>
+                        Delete
+                      </button>
+                    </td>
+                  )}
                 </>
               )}
             </tr>
           ))}
         </tbody>
       </table>
+      <button onClick={toggleActions}>
+        {showActions ? "Hide Edit Mode" : "Show Edit Mode"}
+      </button>
       <div className="add-word-form">
         <h3>Add a new word</h3>
         <input

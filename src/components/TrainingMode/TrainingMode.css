@@ -1,0 +1,15 @@
+@import "../../assets/styles/variables.css";
+
+.training-mode {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 0fr));
+  justify-content: center;
+}
+
+.word-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

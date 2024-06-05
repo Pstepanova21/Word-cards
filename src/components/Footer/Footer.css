@@ -1,9 +1,8 @@
-@import "../assets/styles/variables.css";
+@import "../../assets/styles/variables.css";
 .footer {
   background-color: var(--primary-color);
-  padding: 10px;
+  padding: 1px;
   color: white;
-  position: fixed;
   width: 100%;
   bottom: 0;
 }
