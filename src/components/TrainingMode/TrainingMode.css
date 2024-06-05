@@ -12,4 +12,9 @@
   padding: 16px;
   margin: 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.word-card:hover {
+  transform: scale(1.1);
 }
