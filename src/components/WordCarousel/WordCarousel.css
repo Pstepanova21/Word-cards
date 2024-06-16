@@ -1,0 +1,22 @@
+@import "../../assets/styles/variables.css";
+.word-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  position: relative;
+  padding: 20px;
+  text-align: center;
+  font-size: large;
+}
+
+.word-carousel .word-card {
+  padding: 140px;
+  margin: 30px;
+  transition: transform 0.3s ease; /* Плавный переход для изменения transform */
+}
+
+.word-number {
+  margin-top: 10px; /* Отступ между подписью и кнопками навигации */
+  font-size: small; /* Размер шрифта для подписи */
+}

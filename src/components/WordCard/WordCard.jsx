@@ -5,15 +5,21 @@ const WordCard = ({ word }) => {
   const [showTranslation, setShowTranslation] = useState(false);
 
   const toggleTranslation = () => {
-    setShowTranslation((prevState) => !prevState);
+    setShowTranslation(!showTranslation);
   };
 
   return (
     <div className="word-card">
-      <div className="word">{word.english}</div>
-      <div className="translation">{showTranslation && word.russian}</div>
+      <h3>{word.english}</h3>
+      <p>{word.transcription}</p>
+      <p
+        className={`translation ${showTranslation ? "show" : ""}`}
+        style={{ color: "green" }}
+      >
+        {word.russian}
+      </p>
       <button onClick={toggleTranslation}>
-        {showTranslation ? "Hide Translation" : "Show Translation"}
+        {showTranslation ? "Hide" : "Answer"}
       </button>
     </div>
   );

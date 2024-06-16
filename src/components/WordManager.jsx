@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import WordList from "./WordList/WordList.jsx";
 import TrainingMode from "./TrainingMode/TrainingMode.jsx";
+import WordCarousel from "./WordCarousel/WordCarousel.jsx";
 
 const initialWords = [
   {
@@ -67,8 +68,9 @@ const WordManager = () => {
     return storedWords ? JSON.parse(storedWords) : initialWords;
   });
 
+  const [mode, setMode] = useState("list");
+
   useEffect(() => {
-    console.log("Saving words to localStorage:", words);
     localStorage.setItem("words", JSON.stringify(words));
   }, [words]);
 
@@ -86,13 +88,21 @@ const WordManager = () => {
 
   return (
     <div>
-      <WordList
-        words={words}
-        onUpdateWord={updateWord}
-        onDeleteWord={deleteWord}
-        onAddWord={addWord}
-      />
-      <TrainingMode words={words} />
+      <div className="mode-toggle">
+        <button onClick={() => setMode("list")}>Word List</button>
+        <button onClick={() => setMode("training")}>Training Mode</button>
+        <button onClick={() => setMode("carousel")}>Word Carousel</button>
+      </div>
+      {mode === "list" && (
+        <WordList
+          words={words}
+          onUpdateWord={updateWord}
+          onDeleteWord={deleteWord}
+          onAddWord={addWord}
+        />
+      )}
+      {mode === "training" && <TrainingMode words={words} />}
+      {mode === "carousel" && <WordCarousel words={words} />}
     </div>
   );
 };
