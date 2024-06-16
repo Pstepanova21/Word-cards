@@ -1,7 +1,29 @@
 @import "./assets/styles/variables.css";
 
-.app {
-  text-align: center;
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
   font-family: var(--font-family);
   font-size: var(--font-size);
+}
+
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  text-align: center;
+  width: 100%;
+}
+
+header,
+footer {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+}
+
+main {
+  margin-top: 30px;
 }
