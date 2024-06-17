@@ -1,4 +1,4 @@
-# Word Cards App 📎
+# Word Cards App ![Logo](public/logo2.png)
 
 ## Описание
 
