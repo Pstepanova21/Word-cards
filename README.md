@@ -1,4 +1,4 @@
-# Word Cards App ![Logo](public/logo2.png)
+# Word Cards App <img src="public/logo2.png" alt="Logo" width="150" />
 
 ## Описание
 
