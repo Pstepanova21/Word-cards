@@ -17,11 +17,9 @@ body,
   width: 100%;
 }
 
-header,
-footer {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
+.main-content {
+  margin-top: 100px;
+  padding: 30px;
 }
 
 main {

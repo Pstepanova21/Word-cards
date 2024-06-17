@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import WordList from "./WordList/WordList.jsx";
-import TrainingMode from "./TrainingMode/TrainingMode.jsx";
-import WordCarousel from "./WordCarousel/WordCarousel.jsx";
+import WordList from "../components/WordList/WordList";
+import TrainingMode from "../components/TrainingMode/TrainingMode";
+import WordCarousel from "../components/WordCarousel/WordCarousel";
 
 const initialWords = [
   {
@@ -62,13 +62,11 @@ const initialWords = [
   },
 ];
 
-const WordManager = () => {
+const WordManager = ({ mode }) => {
   const [words, setWords] = useState(() => {
     const storedWords = localStorage.getItem("words");
     return storedWords ? JSON.parse(storedWords) : initialWords;
   });
-
-  const [mode, setMode] = useState("list");
 
   useEffect(() => {
     localStorage.setItem("words", JSON.stringify(words));
@@ -86,25 +84,21 @@ const WordManager = () => {
     setWords([...words, { ...newWord, id: Date.now().toString() }]);
   };
 
-  return (
-    <div>
-      <div className="mode-toggle">
-        <button onClick={() => setMode("list")}>Word List</button>
-        <button onClick={() => setMode("training")}>Training Mode</button>
-        <button onClick={() => setMode("carousel")}>Word Carousel</button>
-      </div>
-      {mode === "list" && (
+  switch (mode) {
+    case "training":
+      return <TrainingMode words={words} />;
+    case "carousel":
+      return <WordCarousel words={words} />;
+    default:
+      return (
         <WordList
           words={words}
           onUpdateWord={updateWord}
           onDeleteWord={deleteWord}
           onAddWord={addWord}
         />
-      )}
-      {mode === "training" && <TrainingMode words={words} />}
-      {mode === "carousel" && <WordCarousel words={words} />}
-    </div>
-  );
+      );
+  }
 };
 
 export default WordManager;

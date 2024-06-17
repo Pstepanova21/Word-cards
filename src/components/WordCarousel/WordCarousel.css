@@ -13,10 +13,10 @@
 .word-carousel .word-card {
   padding: 140px;
   margin: 30px;
-  transition: transform 0.3s ease; /* Плавный переход для изменения transform */
+  transition: transform 0.3s ease;
 }
 
 .word-number {
-  margin-top: 10px; /* Отступ между подписью и кнопками навигации */
-  font-size: small; /* Размер шрифта для подписи */
+  margin-top: 10px;
+  font-size: small;
 }

@@ -1,7 +1,0 @@
-@import "../../assets/styles/variables.css";
-
-.header {
-  background-color: var(--primary-color);
-  padding: 20px;
-  color: white;
-}

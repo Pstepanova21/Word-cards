@@ -1,7 +1,9 @@
 @import "../../assets/styles/variables.css";
 .footer {
   background-color: var(--primary-color);
-  padding: 1px;
   color: white;
+  padding: 10px 20px;
+  text-align: center;
   width: 100%;
+  grid-row-start: 3;
 }
