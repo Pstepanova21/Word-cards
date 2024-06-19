@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import WordCard from "../WordCard/WordCard";
-import "./WordCarousel.css";
+import styles from "./WordCarousel.module.css";
 
 const WordCarousel = ({ words, initialIndex }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
@@ -21,15 +21,21 @@ const WordCarousel = ({ words, initialIndex }) => {
   }
 
   return (
-    <div className="word-carousel">
-      <button onClick={goToPrevCard}>&lt;</button>
-      <div className="word-card-container">
-        <WordCard word={words[currentIndex]} />
-        <p className="word-number">
-          Word {currentIndex + 1} of {words.length}
-        </p>
+    <div className={styles.wordCarouselContainer}>
+      <div className={styles.carouselHeader}>
+        Word {currentIndex + 1} of {words.length}
       </div>
-      <button onClick={goToNextCard}>&gt;</button>
+      <div className={styles.wordCarousel}>
+        <button onClick={goToPrevCard}>&lt;</button>
+        {words.map((word, index) => (
+          <WordCard
+            isCurrent={currentIndex === index}
+            key={word.id}
+            word={word}
+          />
+        ))}
+        <button onClick={goToNextCard}>&gt;</button>
+      </div>
     </div>
   );
 };

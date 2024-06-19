@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./TrainingMode.css";
+import React, { useState, useEffect } from "react";
+import styles from "./TrainingMode.module.css";
 
 const TrainingMode = ({ words }) => {
   const [showTranslations, setShowTranslations] = useState({});
@@ -14,21 +14,24 @@ const TrainingMode = ({ words }) => {
   return (
     <div>
       <h2>Training Mode</h2>
-      <div className="training-mode">
+      <div className={styles.trainingMode}>
         {words.map((word) => (
-          <div className="word-card" key={word.id}>
-            <h3>{word.english}</h3>
-            <p>{word.transcription}</p>
-            <p style={{ color: "green" }}>
-              {showTranslations[word.id] ? word.russian : ""}
-            </p>
-            {showTranslations[word.id] ? (
-              <button onClick={() => toggleTranslation(word.id)}>
-                Hide Answer
-              </button>
-            ) : (
-              <button onClick={() => toggleTranslation(word.id)}>Answer</button>
-            )}
+          <div
+            className={`${styles.wordCard} ${
+              showTranslations[word.id] ? styles.flipped : ""
+            }`}
+            key={word.id}
+            onClick={() => toggleTranslation(word.id)}
+          >
+            <div className={styles.wordCardInner}>
+              <div className={styles.wordCardFront}>
+                <h3>{word.english}</h3>
+                <p>{word.transcription}</p>
+              </div>
+              <div className={styles.wordCardBack}>
+                <p>{word.russian}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>

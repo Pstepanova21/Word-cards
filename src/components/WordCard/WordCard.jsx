@@ -1,26 +1,32 @@
-import React, { useState } from "react";
-import "./WordCard.css";
+import React, { useState, useEffect } from "react";
+import styles from "./WordCard.module.css";
 
-const WordCard = ({ word }) => {
-  const [showTranslation, setShowTranslation] = useState(false);
+const WordCard = ({ isCurrent, word }) => {
+  const [flipped, setFlipped] = useState(false);
 
-  const toggleTranslation = () => {
-    setShowTranslation(!showTranslation);
+  useEffect(() => {
+    setFlipped(false);
+  }, [isCurrent]);
+
+  const toggleFlip = () => {
+    setFlipped(!flipped);
   };
 
+  if (!isCurrent) return null;
+
   return (
-    <div className="word-card">
-      <h3>{word.english}</h3>
-      <p>{word.transcription}</p>
-      <p
-        className={`translation ${showTranslation ? "show" : ""}`}
-        style={{ color: "green" }}
+    <div className={styles.wordCard} onClick={toggleFlip}>
+      <div
+        className={`${styles.wordCardInner} ${flipped ? styles.flipped : ""}`}
       >
-        {word.russian}
-      </p>
-      <button onClick={toggleTranslation}>
-        {showTranslation ? "Hide" : "Answer"}
-      </button>
+        <div className={styles.wordCardFront}>
+          <h3>{word.english}</h3>
+          <p>{word.transcription}</p>
+        </div>
+        <div className={styles.wordCardBack}>
+          <p>{word.russian}</p>
+        </div>
+      </div>
     </div>
   );
 };
