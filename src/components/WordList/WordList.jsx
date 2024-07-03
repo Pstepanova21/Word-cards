@@ -38,79 +38,81 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
     setShowActions(!showActions);
   };
 
-  if (!words.length) {
-    return <p>No words available</p>;
-  }
-
   return (
     <div>
-      <table className="word-list">
-        <thead>
-          <tr>
-            <th>Word</th>
-            <th>Transcription</th>
-            <th>Translation</th>
-            {showActions && <th>Actions</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {words.map((word, index) => (
-            <tr key={word.id}>
-              {isEditing === index ? (
-                <>
-                  <td>
-                    <input
-                      type="text"
-                      name="english"
-                      value={editWord.english}
-                      onChange={(e) => handleChange(e, setEditWord)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="transcription"
-                      value={editWord.transcription}
-                      onChange={(e) => handleChange(e, setEditWord)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="russian"
-                      value={editWord.russian}
-                      onChange={(e) => handleChange(e, setEditWord)}
-                    />
-                  </td>
-                  <td>
-                    <button onClick={handleSaveClick}>Save</button>
-                    <button onClick={() => setIsEditing(null)}>Cancel</button>
-                  </td>
-                </>
-              ) : (
-                <>
-                  <td>{word.english}</td>
-                  <td>{word.transcription}</td>
-                  <td>{word.russian}</td>
-                  {showActions && (
-                    <td className="actions">
-                      <button onClick={() => handleEditClick(index, word)}>
-                        Edit
-                      </button>
-                      <button onClick={() => onDeleteWord(word.id)}>
-                        Delete
-                      </button>
-                    </td>
-                  )}
-                </>
-              )}
+      {words.length > 0 && (
+        <table className="word-list">
+          <thead>
+            <tr>
+              <th>Word</th>
+              <th>Transcription</th>
+              <th>Translation</th>
+              {showActions && <th className="actions">Actions</th>}
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <button onClick={toggleActions}>
-        {showActions ? "Hide Edit Mode" : "Show Edit Mode"}
-      </button>
+          </thead>
+          <tbody>
+            {words.map((word, index) => (
+              <tr key={word.id}>
+                {isEditing === index ? (
+                  <>
+                    <td>
+                      <input
+                        type="text"
+                        name="english"
+                        value={editWord.english}
+                        onChange={(e) => handleChange(e, setEditWord)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="transcription"
+                        value={editWord.transcription}
+                        onChange={(e) => handleChange(e, setEditWord)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="russian"
+                        value={editWord.russian}
+                        onChange={(e) => handleChange(e, setEditWord)}
+                      />
+                    </td>
+                    <td>
+                      <button onClick={handleSaveClick}>Save</button>
+                      <button onClick={() => setIsEditing(null)}>Cancel</button>
+                    </td>
+                  </>
+                ) : (
+                  <>
+                    <td>{word.english}</td>
+                    <td>{word.transcription}</td>
+                    <td>{word.russian}</td>
+                    {showActions && (
+                      <td className="actions">
+                        <button onClick={() => handleEditClick(index, word)}>
+                          Edit
+                        </button>
+                        <button onClick={() => onDeleteWord(word.id)}>
+                          Delete
+                        </button>
+                      </td>
+                    )}
+                  </>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      {words.length > 0 && (
+        <button onClick={toggleActions}>
+          {showActions ? "Hide Edit Mode" : "Show Edit Mode"}
+        </button>
+      )}
+
       <div className="add-word-form">
         <h3>Add a new word</h3>
         <input

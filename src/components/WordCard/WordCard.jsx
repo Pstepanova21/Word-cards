@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./WordCard.module.css";
 
-const WordCard = ({ isCurrent, word }) => {
+const WordCard = ({ isCurrent, word, id }) => {
   const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const WordCard = ({ isCurrent, word }) => {
   if (!isCurrent) return null;
 
   return (
-    <div className={styles.wordCard} onClick={toggleFlip}>
+    <div id={id} className={styles.wordCard} onClick={toggleFlip}>
       <div
         className={`${styles.wordCardInner} ${flipped ? styles.flipped : ""}`}
       >

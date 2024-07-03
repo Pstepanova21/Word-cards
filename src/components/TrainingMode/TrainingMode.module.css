@@ -13,84 +13,54 @@
 }
 
 .wordCard {
-  perspective: 1000px;
-  cursor: pointer;
   position: relative;
   width: 400px;
   height: 250px;
   margin: auto;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
-}
-
-.flipped {
-  transform: rotateY(180deg);
-}
-
-.wordCardInner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #ffffff;
-}
-
-.wordCardFront,
-.wordCardBack {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 15px;
   padding: 20px;
   box-sizing: border-box;
 }
 
-.wordCardFront {
-  background-color: #ffffff;
-  color: black;
+.counter {
+  font-size: larger;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.wordCardBack {
-  background-color: #007bff;
-  color: white;
-  font-size: larger;
-  font-weight: 700;
-  transform: rotateY(180deg);
+.wordCard h3 {
+  margin: 0;
+}
+
+.wordCard p {
+  margin: 20px 0;
 }
 
 .translation {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 0.5s ease, max-height 0.5s ease;
   color: green;
+  font-weight: bold;
+  margin-top: 100px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 .show {
   opacity: 1;
-  max-height: 200px;
-}
-
-.translationContainer {
-  position: absolute;
-  width: 100%;
-  bottom: 20px;
-  left: 0;
-  text-align: center;
 }
 
 .button {
   margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
 }
