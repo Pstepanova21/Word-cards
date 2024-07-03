@@ -13,14 +13,6 @@
 - **Режим тренировки:** Тренировка слов с помощью карточек.
 - **Сохранение данных:** Все данные сохраняются в `localStorage`, что позволяет сохранять изменения между перезагрузками страницы.
 
-## Установка
-
-1. Склонируйте репозиторий:
-   git clone https://github.com/yourusername/word-cards-app.git
-   cd word-cards-app
-2. Установите зависимости: npm install
-3. Запустите приложение: npm start
-
 ## Используемые технологии
 
 - **React**
@@ -34,8 +26,8 @@
 ## Установка
 
 1. Склонируйте репозиторий:
-   git clone https://github.com/yourusername/word-cards-app.git
-   cd word-cards-app
+   git clone https://github.com/Pstepanova21/Word-cards.git
+   cd Word-cards
 2. Установите зависимости: npm install
 3. Запустите приложение: npm start
 
