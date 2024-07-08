@@ -27,23 +27,21 @@
 .word-list input {
   width: 80%;
   border-radius: var(--border-radius);
-  border: 1px solid #ddd;
+  border: 1px solid #afafaf;
   box-sizing: border-box;
 }
+
 .actions {
   width: 30%;
 }
 
-.add-word-form {
-  margin: 5%;
-  color: var(--text);
+.word-list .empty-field {
+  border: 1px solid red;
 }
 
-.add-word-form input {
-  margin-right: 10px;
-  padding: 5px;
-}
-
-.add-word-form button:hover {
-  background-color: var(--button-color-2);
+.disabled-button {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  pointer-events: none;
 }

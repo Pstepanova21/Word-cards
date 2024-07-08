@@ -1,0 +1,49 @@
+@import "../../assets/styles/variables.css";
+@import "../../assets/styles/buttons.css";
+
+.addWordForm {
+  margin: 5% auto;
+  color: var(--text);
+  max-width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.addWordForm h3 {
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.addWordForm .inputContainer {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.addWordForm input {
+  border-radius: var(--border-radius);
+  border: 1px solid #afafaf;
+  padding: 5px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.addWordForm .error {
+  border: 1px solid red;
+}
+
+.addWordForm .errorMessage {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.buttonContainer {
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+}

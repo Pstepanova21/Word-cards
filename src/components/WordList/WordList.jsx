@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import "./WordList.css";
+import AddWordForm from "../AddWordForm/AddWordForm";
 
 const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
   const [isEditing, setIsEditing] = useState(null);
   const [editWord, setEditWord] = useState({});
-  const [newWord, setNewWord] = useState({
-    english: "",
-    transcription: "",
-    russian: "",
-  });
   const [showActions, setShowActions] = useState(false);
+  const [emptyFields, setEmptyFields] = useState({
+    english: false,
+    transcription: false,
+    russian: false,
+  });
 
   const handleEditClick = (index, word) => {
     setIsEditing(index);
     setEditWord(word);
+    setEmptyFields({
+      english: false,
+      transcription: false,
+      russian: false,
+    });
   };
 
   const handleSaveClick = () => {
@@ -21,14 +27,18 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
     setIsEditing(null);
   };
 
-  const handleChange = (e, setState) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setState((prevState) => ({ ...prevState, [name]: value }));
-  };
+    setEditWord((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
 
-  const handleAddClick = () => {
-    onAddWord(newWord);
-    setNewWord({ english: "", transcription: "", russian: "" });
+    const isEmpty = value.trim() === "";
+    setEmptyFields((prevEmptyFields) => ({
+      ...prevEmptyFields,
+      [name]: isEmpty,
+    }));
   };
 
   const toggleActions = () => {
@@ -37,6 +47,9 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
     }
     setShowActions(!showActions);
   };
+
+  const hasEmptyField =
+    emptyFields.english || emptyFields.transcription || emptyFields.russian;
 
   return (
     <div>
@@ -60,7 +73,8 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
                         type="text"
                         name="english"
                         value={editWord.english}
-                        onChange={(e) => handleChange(e, setEditWord)}
+                        onChange={handleChange}
+                        className={emptyFields.english ? "empty-field" : ""}
                       />
                     </td>
                     <td>
@@ -68,7 +82,10 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
                         type="text"
                         name="transcription"
                         value={editWord.transcription}
-                        onChange={(e) => handleChange(e, setEditWord)}
+                        onChange={handleChange}
+                        className={
+                          emptyFields.transcription ? "empty-field" : ""
+                        }
                       />
                     </td>
                     <td>
@@ -76,11 +93,18 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
                         type="text"
                         name="russian"
                         value={editWord.russian}
-                        onChange={(e) => handleChange(e, setEditWord)}
+                        onChange={handleChange}
+                        className={emptyFields.russian ? "empty-field" : ""}
                       />
                     </td>
                     <td>
-                      <button onClick={handleSaveClick}>Save</button>
+                      <button
+                        onClick={handleSaveClick}
+                        disabled={hasEmptyField}
+                        className={hasEmptyField ? "disabled-button" : ""}
+                      >
+                        Save
+                      </button>
                       <button onClick={() => setIsEditing(null)}>Cancel</button>
                     </td>
                   </>
@@ -113,31 +137,7 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
         </button>
       )}
 
-      <div className="add-word-form">
-        <h3>Add a new word</h3>
-        <input
-          type="text"
-          name="english"
-          placeholder="English"
-          value={newWord.english}
-          onChange={(e) => handleChange(e, setNewWord)}
-        />
-        <input
-          type="text"
-          name="transcription"
-          placeholder="Transcription"
-          value={newWord.transcription}
-          onChange={(e) => handleChange(e, setNewWord)}
-        />
-        <input
-          type="text"
-          name="russian"
-          placeholder="Russian"
-          value={newWord.russian}
-          onChange={(e) => handleChange(e, setNewWord)}
-        />
-        <button onClick={handleAddClick}>Add Word</button>
-      </div>
+      <AddWordForm onAddWord={onAddWord} />
     </div>
   );
 };
