@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import WordCard from "../WordCard/WordCard";
 import styles from "./WordCarousel.module.css";
 
-const WordCarousel = ({ words, initialIndex }) => {
+const WordCarousel = ({ words, initialIndex = 0 }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   const goToNextCard = useCallback(() => {
@@ -77,10 +77,6 @@ WordCarousel.propTypes = {
     })
   ).isRequired,
   initialIndex: PropTypes.number,
-};
-
-WordCarousel.defaultProps = {
-  initialIndex: 0,
 };
 
 export default WordCarousel;

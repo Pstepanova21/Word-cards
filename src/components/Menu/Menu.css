@@ -47,3 +47,18 @@
 .mode-link:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+@media (max-width: 768px) {
+  .mode-toggle {
+    gap: 5px;
+  }
+  .menu {
+    padding: 10px 30px;
+  }
+  .logo img {
+    width: 40px;
+  }
+  .logo {
+    font-size: 20px;
+  }
+}
