@@ -26,7 +26,6 @@ const WordCarousel = ({ words, initialIndex = 0 }) => {
         goToNextCard();
       } else if (event.key === " ") {
         event.preventDefault();
-        // Trigger flip of current word card
         document.getElementById(`word-card-${currentIndex}`).click();
       }
     };
