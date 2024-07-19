@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import styles from "./TrainingMode.module.css";
+import { WordContext } from "../../contexts/WordContext";
 
-const TrainingMode = ({ words }) => {
+const TrainingMode = () => {
+  const { words } = useContext(WordContext);
   const [showTranslations, setShowTranslations] = useState({});
   const [wordsStudied, setWordsStudied] = useState(0);
   const buttonRefs = useRef({});

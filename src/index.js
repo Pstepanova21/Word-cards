@@ -1,8 +1,19 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App"; // Импортируем главный компонент
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import WordContextProvider from "./contexts/WordContext";
 
-const container = document.getElementById("root");
-const root = createRoot(container); // Создаем корень
+// Получаем контейнер для рендеринга
+const rootElement = document.getElementById("root");
 
-root.render(<App />); // Рендерим приложение
+// Создаем корневой рендерер
+const root = ReactDOM.createRoot(rootElement);
+
+// Рендерим приложение
+root.render(
+  <React.StrictMode>
+    <WordContextProvider>
+      <App />
+    </WordContextProvider>
+  </React.StrictMode>
+);

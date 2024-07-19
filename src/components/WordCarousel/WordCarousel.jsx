@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import PropTypes from "prop-types";
 import WordCard from "../WordCard/WordCard";
 import styles from "./WordCarousel.module.css";
+import { WordContext } from "../../contexts/WordContext";
 
-const WordCarousel = ({ words, initialIndex = 0 }) => {
+const WordCarousel = ({ initialIndex = 0 }) => {
+  const { words } = useContext(WordContext);
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   const goToNextCard = useCallback(() => {
@@ -67,14 +69,6 @@ const WordCarousel = ({ words, initialIndex = 0 }) => {
 };
 
 WordCarousel.propTypes = {
-  words: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      english: PropTypes.string.isRequired,
-      transcription: PropTypes.string.isRequired,
-      russian: PropTypes.string.isRequired,
-    })
-  ).isRequired,
   initialIndex: PropTypes.number,
 };
 
