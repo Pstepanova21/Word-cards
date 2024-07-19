@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./AddWordForm.module.css";
+import { WordContext } from "../../contexts/WordContext";
 
-const AddWordForm = ({ onAddWord }) => {
+const AddWordForm = () => {
+  const { addWord } = useContext(WordContext);
+
   const [newWord, setNewWord] = useState({
     english: "",
     transcription: "",
@@ -27,7 +30,7 @@ const AddWordForm = ({ onAddWord }) => {
     }));
   };
 
-  const handleAddClick = () => {
+  const handleAddClick = async () => {
     // Проверяем на пустые поля перед добавлением слова
     if (newWord.english.trim() === "") {
       setErrors((prevErrors) => ({
@@ -58,7 +61,7 @@ const AddWordForm = ({ onAddWord }) => {
     }
 
     // Добавляем слово
-    onAddWord(newWord);
+    await addWord(newWord);
     setNewWord({ english: "", transcription: "", russian: "" });
     // Очищаем ошибки после добавления слова
     setErrors({

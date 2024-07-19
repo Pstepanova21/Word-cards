@@ -22,8 +22,8 @@ const WordList = ({ words, onUpdateWord, onDeleteWord, onAddWord }) => {
     });
   };
 
-  const handleSaveClick = () => {
-    onUpdateWord(editWord.id, editWord);
+  const handleSaveClick = async () => {
+    await onUpdateWord(editWord.id, editWord);
     setIsEditing(null);
   };
 
