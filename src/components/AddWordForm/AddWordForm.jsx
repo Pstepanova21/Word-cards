@@ -23,7 +23,6 @@ const AddWordForm = () => {
       ...prevState,
       [name]: value,
     }));
-    // Очищаем ошибки при изменении содержимого поля
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: false,
@@ -31,7 +30,6 @@ const AddWordForm = () => {
   };
 
   const handleAddClick = async () => {
-    // Проверяем на пустые поля перед добавлением слова
     if (newWord.english.trim() === "") {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -51,7 +49,6 @@ const AddWordForm = () => {
       }));
     }
 
-    // Если есть хотя бы одно пустое поле, не добавляем слово
     if (
       newWord.english.trim() === "" ||
       newWord.transcription.trim() === "" ||
@@ -60,10 +57,8 @@ const AddWordForm = () => {
       return;
     }
 
-    // Добавляем слово
     await addWord(newWord);
     setNewWord({ english: "", transcription: "", russian: "" });
-    // Очищаем ошибки после добавления слова
     setErrors({
       english: false,
       transcription: false,

@@ -15,9 +15,7 @@ const WordContextProvider = (props) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(
-        "http://itgirlschool.justmakeit.ru/api/words"
-      );
+      const response = await fetch("/api/words");
       if (!response.ok) {
         throw new Error("Failed to fetch words");
       }
@@ -30,22 +28,34 @@ const WordContextProvider = (props) => {
     }
   };
 
-  const addWord = (newWord) => {
-    setWords([...words, { ...newWord, id: Date.now().toString() }]);
+  const addWord = async (newWord) => {
+    try {
+      const response = await fetch("/api/words", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newWord),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to add word");
+      }
+      const addedWord = await response.json();
+      setWords((prevWords) => [...prevWords, addedWord]);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   const updateWord = async (id, updatedWord) => {
     try {
-      const response = await fetch(
-        `http://itgirlschool.justmakeit.ru/api/words/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedWord),
-        }
-      );
+      const response = await fetch(`/api/words/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedWord),
+      });
       if (!response.ok) {
         throw new Error("Failed to update word");
       }
@@ -60,12 +70,9 @@ const WordContextProvider = (props) => {
 
   const deleteWord = async (id) => {
     try {
-      const response = await fetch(
-        `http://itgirlschool.justmakeit.ru/api/words/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/words/${id}`, {
+        method: "DELETE",
+      });
       if (!response.ok) {
         throw new Error("Failed to delete word");
       }
