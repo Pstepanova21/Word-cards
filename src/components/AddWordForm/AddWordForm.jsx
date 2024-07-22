@@ -20,7 +20,6 @@ const AddWordForm = ({ onAddWord }) => {
       ...prevState,
       [name]: value,
     }));
-    // Очищаем ошибки при изменении содержимого поля
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: false,
@@ -28,39 +27,21 @@ const AddWordForm = ({ onAddWord }) => {
   };
 
   const handleAddClick = () => {
-    // Проверяем на пустые поля перед добавлением слова
-    if (newWord.english.trim() === "") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        english: true,
-      }));
-    }
-    if (newWord.transcription.trim() === "") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        transcription: true,
-      }));
-    }
-    if (newWord.russian.trim() === "") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        russian: true,
-      }));
-    }
-
-    // Если есть хотя бы одно пустое поле, не добавляем слово
     if (
       newWord.english.trim() === "" ||
       newWord.transcription.trim() === "" ||
       newWord.russian.trim() === ""
     ) {
+      setErrors({
+        english: newWord.english.trim() === "",
+        transcription: newWord.transcription.trim() === "",
+        russian: newWord.russian.trim() === "",
+      });
       return;
     }
 
-    // Добавляем слово
     onAddWord(newWord);
     setNewWord({ english: "", transcription: "", russian: "" });
-    // Очищаем ошибки после добавления слова
     setErrors({
       english: false,
       transcription: false,
