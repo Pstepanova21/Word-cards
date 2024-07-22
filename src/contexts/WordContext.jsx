@@ -30,7 +30,7 @@ const WordContextProvider = (props) => {
 
   const addWord = async (newWord) => {
     try {
-      const response = await fetch("/api/words", {
+      const response = await fetch("/api/words/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,8 +49,8 @@ const WordContextProvider = (props) => {
 
   const updateWord = async (id, updatedWord) => {
     try {
-      const response = await fetch(`/api/words/${id}`, {
-        method: "PUT",
+      const response = await fetch(`/api/words/${id}/update`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
