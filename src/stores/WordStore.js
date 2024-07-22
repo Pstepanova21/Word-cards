@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import * as api from "../api/api";
 
 class WordStore {
   words = [];
@@ -9,11 +10,7 @@ class WordStore {
 
   fetchWords = async () => {
     try {
-      const response = await fetch(
-        "http://itgirlschool.justmakeit.ru/api/words"
-      );
-      const data = await response.json();
-      this.words = data;
+      this.words = await api.fetchWords();
     } catch (error) {
       console.error("Failed to fetch words", error);
     }
@@ -21,17 +18,7 @@ class WordStore {
 
   addWord = async (newWord) => {
     try {
-      const response = await fetch(
-        "http://itgirlschool.justmakeit.ru/api/words/add",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newWord),
-        }
-      );
-      const data = await response.json();
+      const data = await api.addWord(newWord);
       this.words.push(data);
     } catch (error) {
       console.error("Failed to add word", error);
@@ -40,16 +27,8 @@ class WordStore {
 
   updateWord = async (id, updatedWord) => {
     try {
-      await fetch(`http://itgirlschool.justmakeit.ru/api/words/${id}/update`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedWord),
-      });
-      this.words = this.words.map((word) =>
-        word.id === id ? updatedWord : word
-      );
+      const data = await api.updateWord(id, updatedWord);
+      this.words = this.words.map((word) => (word.id === id ? data : word));
     } catch (error) {
       console.error("Failed to update word", error);
     }
@@ -57,9 +36,7 @@ class WordStore {
 
   deleteWord = async (id) => {
     try {
-      await fetch(`http://itgirlschool.justmakeit.ru/api/words/${id}`, {
-        method: "DELETE",
-      });
+      await api.deleteWord(id);
       this.words = this.words.filter((word) => word.id !== id);
     } catch (error) {
       console.error("Failed to delete word", error);
