@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
+import * as api from "../api/api";
 
 export const WordContext = createContext();
 
@@ -15,11 +16,7 @@ const WordContextProvider = (props) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch("/api/words");
-      if (!response.ok) {
-        throw new Error("Failed to fetch words");
-      }
-      const data = await response.json();
+      const data = await api.fetchWords();
       setWords(data);
     } catch (error) {
       setError(error.message);
@@ -30,17 +27,7 @@ const WordContextProvider = (props) => {
 
   const addWord = async (newWord) => {
     try {
-      const response = await fetch("/api/words/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newWord),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to add word");
-      }
-      const addedWord = await response.json();
+      const addedWord = await api.addWord(newWord);
       setWords((prevWords) => [...prevWords, addedWord]);
     } catch (error) {
       setError(error.message);
@@ -49,20 +36,10 @@ const WordContextProvider = (props) => {
 
   const updateWord = async (id, updatedWord) => {
     try {
-      const response = await fetch(`/api/words/${id}/update`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedWord),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to update word");
-      }
-      const updatedWords = words.map((word) =>
-        word.id === id ? updatedWord : word
+      await api.updateWord(id, updatedWord);
+      setWords((prevWords) =>
+        prevWords.map((word) => (word.id === id ? updatedWord : word))
       );
-      setWords(updatedWords);
     } catch (error) {
       setError(error.message);
     }
@@ -70,14 +47,8 @@ const WordContextProvider = (props) => {
 
   const deleteWord = async (id) => {
     try {
-      const response = await fetch(`/api/words/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) {
-        throw new Error("Failed to delete word");
-      }
-      const updatedWords = words.filter((word) => word.id !== id);
-      setWords(updatedWords);
+      await api.deleteWord(id);
+      setWords((prevWords) => prevWords.filter((word) => word.id !== id));
     } catch (error) {
       setError(error.message);
     }
