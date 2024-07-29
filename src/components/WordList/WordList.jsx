@@ -3,7 +3,6 @@ import { observer, inject } from "mobx-react";
 import AddWordForm from "../AddWordForm/AddWordForm";
 import "./WordList.css";
 
-// Регулярные выражения для проверки латинских и кириллических букв
 const latinRegex = /^[A-Za-z\s]+$/;
 const cyrillicRegex = /^[А-Яа-я\s]+$/;
 

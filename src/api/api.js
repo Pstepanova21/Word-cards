@@ -42,7 +42,7 @@ export const updateWord = async (id, updatedWord) => {
     if (!response.ok) {
       throw new Error(`Error ${response.status}: ${response.statusText}`);
     }
-    return await response.json(); // предположим, что сервер возвращает обновленное слово
+    return await response.json();
   } catch (error) {
     console.error("Failed to update word", error);
     throw error;
