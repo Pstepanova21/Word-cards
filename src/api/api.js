@@ -1,6 +1,9 @@
 export const fetchWords = async () => {
   try {
     const response = await fetch("/api/words");
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
     return await response.json();
   } catch (error) {
     console.error("Failed to fetch words", error);
@@ -17,6 +20,9 @@ export const addWord = async (newWord) => {
       },
       body: JSON.stringify(newWord),
     });
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
     return await response.json();
   } catch (error) {
     console.error("Failed to add word", error);
@@ -26,14 +32,17 @@ export const addWord = async (newWord) => {
 
 export const updateWord = async (id, updatedWord) => {
   try {
-    await fetch(`/api/words/${id}/update`, {
+    const response = await fetch(`/api/words/${id}/update`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedWord),
     });
-    return updatedWord;
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+    return await response.json(); // предположим, что сервер возвращает обновленное слово
   } catch (error) {
     console.error("Failed to update word", error);
     throw error;
@@ -42,9 +51,13 @@ export const updateWord = async (id, updatedWord) => {
 
 export const deleteWord = async (id) => {
   try {
-    await fetch(`/api/words/${id}`, {
+    const response = await fetch(`/api/words/${id}`, {
       method: "DELETE",
     });
+    if (!response.ok) {
+      throw new Error(`Failed to delete word with id: ${id}`);
+    }
+    return response;
   } catch (error) {
     console.error("Failed to delete word", error);
     throw error;

@@ -26,19 +26,20 @@ const AddWordForm = ({ onAddWord }) => {
     }));
   };
 
+  const validateInput = () => {
+    const englishRegex = /^[a-zA-Z\s]+$/;
+    const russianRegex = /^[а-яА-Я\s]+$/;
+    const newErrors = {
+      english: !englishRegex.test(newWord.english),
+      transcription: newWord.transcription.trim() === "",
+      russian: !russianRegex.test(newWord.russian),
+    };
+    setErrors(newErrors);
+    return !Object.values(newErrors).some((error) => error);
+  };
+
   const handleAddClick = () => {
-    if (
-      newWord.english.trim() === "" ||
-      newWord.transcription.trim() === "" ||
-      newWord.russian.trim() === ""
-    ) {
-      setErrors({
-        english: newWord.english.trim() === "",
-        transcription: newWord.transcription.trim() === "",
-        russian: newWord.russian.trim() === "",
-      });
-      return;
-    }
+    if (!validateInput()) return;
 
     onAddWord(newWord);
     setNewWord({ english: "", transcription: "", russian: "" });
@@ -51,7 +52,7 @@ const AddWordForm = ({ onAddWord }) => {
 
   return (
     <div className={styles.addWordForm}>
-      <h3>Add a new word</h3>
+      <h3>Add new word</h3>
       <div className={styles.inputContainer}>
         <input
           type="text"
@@ -62,7 +63,9 @@ const AddWordForm = ({ onAddWord }) => {
           className={`${styles.input} ${errors.english ? styles.error : ""}`}
         />
         {errors.english && (
-          <span className={styles.errorMessage}>Field cannot be empty</span>
+          <span className={styles.errorMessage}>
+            Field cannot be empty and must contain only Latin letters
+          </span>
         )}
       </div>
       <div className={styles.inputContainer}>
@@ -90,11 +93,13 @@ const AddWordForm = ({ onAddWord }) => {
           className={`${styles.input} ${errors.russian ? styles.error : ""}`}
         />
         {errors.russian && (
-          <span className={styles.errorMessage}>Field cannot be empty</span>
+          <span className={styles.errorMessage}>
+            Field cannot be empty and must contain only Cyrillic letters
+          </span>
         )}
       </div>
       <div className={styles.buttonContainer}>
-        <button onClick={handleAddClick}>Add Word</button>
+        <button onClick={handleAddClick}>Add word</button>
       </div>
     </div>
   );

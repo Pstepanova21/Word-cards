@@ -20,7 +20,9 @@ const TrainingMode = inject("wordStore")(
 
     const toggleTranslation = (wordId) => {
       if (!showTranslations[wordId]) {
-        setWordsStudied(wordsStudied + 1);
+        setWordsStudied((prev) => prev + 1);
+      } else {
+        setWordsStudied((prev) => prev - 1);
       }
       setShowTranslations((prevState) => ({
         ...prevState,
@@ -48,7 +50,7 @@ const TrainingMode = inject("wordStore")(
                 onClick={() => toggleTranslation(word.id)}
                 className={styles.button}
               >
-                {showTranslations[word.id] ? "Hide Answer" : "Answer"}
+                {showTranslations[word.id] ? "Hide Answer" : "Show Answer"}
               </button>
             </div>
           ))}

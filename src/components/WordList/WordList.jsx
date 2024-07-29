@@ -3,6 +3,10 @@ import { observer, inject } from "mobx-react";
 import AddWordForm from "../AddWordForm/AddWordForm";
 import "./WordList.css";
 
+// Регулярные выражения для проверки латинских и кириллических букв
+const latinRegex = /^[A-Za-z\s]+$/;
+const cyrillicRegex = /^[А-Яа-я\s]+$/;
+
 const WordList = inject("wordStore")(
   observer(({ wordStore }) => {
     const [isEditing, setIsEditing] = useState(null);
@@ -13,10 +17,24 @@ const WordList = inject("wordStore")(
       transcription: false,
       russian: false,
     });
+    const [invalidFields, setInvalidFields] = useState({
+      english: false,
+      russian: false,
+    });
 
     useEffect(() => {
       wordStore.fetchWords();
     }, [wordStore]);
+
+    const validateFields = () => {
+      const invalid = {
+        english: !latinRegex.test(editWord.english),
+        russian: !cyrillicRegex.test(editWord.russian),
+      };
+
+      setInvalidFields(invalid);
+      return Object.values(invalid).every((isInvalid) => !isInvalid);
+    };
 
     const handleEditClick = (index, word) => {
       setIsEditing(index);
@@ -26,11 +44,17 @@ const WordList = inject("wordStore")(
         transcription: false,
         russian: false,
       });
+      setInvalidFields({
+        english: false,
+        russian: false,
+      });
     };
 
     const handleSaveClick = () => {
-      wordStore.updateWord(editWord.id, editWord);
-      setIsEditing(null);
+      if (validateFields()) {
+        wordStore.updateWord(editWord.id, editWord);
+        setIsEditing(null);
+      }
     };
 
     const handleChange = (e) => {
@@ -45,6 +69,11 @@ const WordList = inject("wordStore")(
         ...prevEmptyFields,
         [name]: isEmpty,
       }));
+
+      // Validate the field whenever it's changed
+      if (name === "english" || name === "russian") {
+        validateFields();
+      }
     };
 
     const toggleActions = () => {
@@ -56,6 +85,14 @@ const WordList = inject("wordStore")(
 
     const hasEmptyField =
       emptyFields.english || emptyFields.transcription || emptyFields.russian;
+
+    const handleDeleteClick = async (id) => {
+      try {
+        await wordStore.deleteWord(id);
+      } catch (error) {
+        console.error("Failed to delete word", error);
+      }
+    };
 
     return (
       <div>
@@ -80,8 +117,18 @@ const WordList = inject("wordStore")(
                           name="english"
                           value={editWord.english}
                           onChange={handleChange}
-                          className={emptyFields.english ? "empty-field" : ""}
+                          className={`${
+                            emptyFields.english || invalidFields.english
+                              ? "empty-field"
+                              : ""
+                          }`}
+                          placeholder="Enter the word in English"
                         />
+                        {invalidFields.english && (
+                          <div className="error-message">
+                            Must be Latin letters
+                          </div>
+                        )}
                       </td>
                       <td>
                         <input
@@ -92,6 +139,7 @@ const WordList = inject("wordStore")(
                           className={
                             emptyFields.transcription ? "empty-field" : ""
                           }
+                          placeholder="Enter transcription"
                         />
                       </td>
                       <td>
@@ -100,13 +148,26 @@ const WordList = inject("wordStore")(
                           name="russian"
                           value={editWord.russian}
                           onChange={handleChange}
-                          className={emptyFields.russian ? "empty-field" : ""}
+                          className={`${
+                            emptyFields.russian || invalidFields.russian
+                              ? "empty-field"
+                              : ""
+                          }`}
+                          placeholder="Enter the translation in Russian"
                         />
+                        {invalidFields.russian && (
+                          <div className="error-message">
+                            Must be Cyrillic letters
+                          </div>
+                        )}
                       </td>
                       <td>
                         <button
                           onClick={handleSaveClick}
-                          disabled={hasEmptyField}
+                          disabled={
+                            hasEmptyField ||
+                            Object.values(invalidFields).includes(true)
+                          }
                         >
                           Save
                         </button>
@@ -125,7 +186,7 @@ const WordList = inject("wordStore")(
                           <button onClick={() => handleEditClick(index, word)}>
                             Edit
                           </button>
-                          <button onClick={() => wordStore.deleteWord(word.id)}>
+                          <button onClick={() => handleDeleteClick(word.id)}>
                             Delete
                           </button>
                         </td>

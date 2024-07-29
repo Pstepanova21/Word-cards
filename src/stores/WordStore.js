@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, action } from "mobx";
 import * as api from "../api/api";
 
 class WordStore {
@@ -19,7 +19,7 @@ class WordStore {
   addWord = async (newWord) => {
     try {
       const data = await api.addWord(newWord);
-      this.words.push(data);
+      this.addWordToList(data);
     } catch (error) {
       console.error("Failed to add word", error);
     }
@@ -28,20 +28,40 @@ class WordStore {
   updateWord = async (id, updatedWord) => {
     try {
       const data = await api.updateWord(id, updatedWord);
-      this.words = this.words.map((word) => (word.id === id ? data : word));
+      this.updateWordInList(id, data);
     } catch (error) {
       console.error("Failed to update word", error);
     }
   };
 
-  deleteWord = async (id) => {
+  deleteWord = action(async (id) => {
     try {
-      await api.deleteWord(id);
-      this.words = this.words.filter((word) => word.id !== id);
+      const response = await api.deleteWord(id);
+      if (response.ok) {
+        this.removeWordFromList(id);
+      } else {
+        console.error(
+          `Failed to delete word with id: ${id}, status: ${response.status}`
+        );
+      }
     } catch (error) {
       console.error("Failed to delete word", error);
     }
-  };
+  });
+
+  addWordToList = action((word) => {
+    this.words.push(word);
+  });
+
+  updateWordInList = action((id, updatedWord) => {
+    this.words = this.words.map((word) =>
+      word.id === id ? updatedWord : word
+    );
+  });
+
+  removeWordFromList = action((id) => {
+    this.words = this.words.filter((word) => word.id !== id);
+  });
 }
 
 const wordStore = new WordStore();
