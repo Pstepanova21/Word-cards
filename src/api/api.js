@@ -51,8 +51,8 @@ export const updateWord = async (id, updatedWord) => {
 
 export const deleteWord = async (id) => {
   try {
-    const response = await fetch(`/api/words/${id}`, {
-      method: "DELETE",
+    const response = await fetch(`/api/words/${id}/delete`, {
+      method: "POST",
     });
     if (!response.ok) {
       throw new Error(`Failed to delete word with id: ${id}`);
