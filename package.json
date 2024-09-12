@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://itgirlschool.justmakeit.ru",
+  "homepage": "Pstepanova21.github.io/Word-cards",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -18,7 +19,6 @@
     "sass": "^1.77.3",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "Pstepanova21.github.io/Word-cards",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
