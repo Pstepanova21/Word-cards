@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Pstepanova21.github.io/Word-cards/static/css/main.f333cf6c.css",
+    "main.js": "/Pstepanova21.github.io/Word-cards/static/js/main.f7b4cf1c.js",
+    "static/media/logo2.png": "/Pstepanova21.github.io/Word-cards/static/media/logo2.27d284c2682c75991eb9.png",
+    "index.html": "/Pstepanova21.github.io/Word-cards/index.html",
+    "main.f333cf6c.css.map": "/Pstepanova21.github.io/Word-cards/static/css/main.f333cf6c.css.map",
+    "main.f7b4cf1c.js.map": "/Pstepanova21.github.io/Word-cards/static/js/main.f7b4cf1c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f333cf6c.css",
+    "static/js/main.f7b4cf1c.js"
+  ]
+}
