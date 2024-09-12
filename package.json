@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "gh-pages": "^6.1.1",
     "mobx": "^6.13.1",
     "mobx-react": "^9.1.1",
     "mobx-react-lite": "^4.0.7",
@@ -18,11 +19,14 @@
     "sass": "^1.77.3",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "Pstepanova21.github.io/Word-cards",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+      "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
